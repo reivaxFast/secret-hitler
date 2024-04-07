@@ -1,4 +1,4 @@
-import display, time, threading
+import display, threading, Secret_Hitler
 
 def test():
     global screen
@@ -7,7 +7,9 @@ def test():
     for i in range(5):
         screen.add_card(input())
 screen = display.screen()
-t = threading.Thread(target= test)
+g = Secret_Hitler.game()
+t = threading.Thread(target=g.game_start)
 t.start()
 while True:
     screen.update()
+    screen.add_card(g.get_board())

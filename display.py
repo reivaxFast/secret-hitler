@@ -20,10 +20,7 @@ class board:
                 self.window.blit(self.FASCIST, (25+(200 * i), 300))
     
     def add_card(self, card):
-        if 'f' in card:
-            self.cards[1] += 1
-        else:
-            self.cards[0] += 1
+        self.cards = card
 
 
 class screen:
