@@ -27,6 +27,8 @@ class screen:
     BACKGROUND = (9, 71, 15)
     def __init__(self):
         pygame.init()
+        img = pygame.image.load('icon.svg')
+        pygame.display.set_icon(img) 
         width, height = 1000, 500
         self.window = pygame.display.set_mode((width, height), pygame.RESIZABLE)
         self.board = board(self.window)
