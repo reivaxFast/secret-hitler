@@ -24,6 +24,7 @@ class game: ### Number of Facists Policies placed
         self.discard = []        ### Discard pile
         self.lib_board = 0       ### Number of Liberal Policies placed
         self.fac_board = 0
+        self.num_players = 0
         #self.game_start()
     
     def addplayer(self):
@@ -168,7 +169,7 @@ class game: ### Number of Facists Policies placed
                     print(self.party_mem[self.pos])
             else:
                 print("Player is dead or not in player list. Try again.\n")
-                self.president_powers(self.fac_board)
+                self.president_powers()
 
         elif self.fac_board == 3:
             print("Choose the next President.\n")
@@ -185,7 +186,7 @@ class game: ### Number of Facists Policies placed
                     self.players.pop(self.pos)    ### Removes player from list
                     self.party_mem.pop(self.pos)  ### Removes party membership from list
             else:
-                self.president_powers(self.fac_board)
+                self.president_powers()
 
         self.next_ = input("Press Enter for next round\n")
         os.system('cls' if os.name == 'nt' else 'clear')

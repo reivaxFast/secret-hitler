@@ -2,36 +2,46 @@ import pygame, sys
 
 class board:
     HOLDERS = (54, 52, 53)
-    LIBERAL = pygame.image.load('liberal.png')
-    FASCIST = pygame.image.load('fascist.png')
-    def __init__(self, window: pygame.Surface) -> None:
+    LIBERAL = pygame.transform.scale_by(pygame.image.load('liberal.png'), 0.85)
+    FASCIST = pygame.transform.scale_by(pygame.image.load('fascist.png'), 0.85)
+    B5 = pygame.transform.scale_by(pygame.image.load('5-6.png'), 0.7)
+    B7 = pygame.transform.scale_by(pygame.image.load('7-8.png'), 0.7)
+    B9 = pygame.transform.scale_by(pygame.image.load('9-10.png'), 0.7)
+    lib = pygame.transform.scale_by(pygame.image.load('lib.png'), 0.7)
+    def __init__(self, window: pygame.Surface, num) -> None:
         self.window = window
+        self.num_players = num
         self.cards = [0,0]
 
     def draw_cards(self):
         #element 1 in cards is number of fascists, element 2 is number of liberals
+        if self.num_players < 7:
+            self.window.blit(self.B5, (35, 500))
+        elif self.num_players < 9:
+            self.window.blit(self.B7, (35, 500))
+        else:
+            self.window.blit(self.B9, (35, 500))
+        self.window.blit(self.lib, (35, 20))
         for i in range(5):
-            pygame.draw.rect(self.window, self.HOLDERS, pygame.Rect(25+(200 * i), 25, 165, 242), border_radius=10)
             if i<self.cards[0]:
-                self.window.blit(self.LIBERAL, (20+(200 * i), 25))
+                self.window.blit(self.LIBERAL, (245+(160 * i), 147))
         for i in range(6):
-            pygame.draw.rect(self.window, self.HOLDERS, pygame.Rect(25+(200 * i), 300, 175, 245), border_radius=10)
             if i<self.cards[1]:
-                self.window.blit(self.FASCIST, (25+(200 * i), 300))
+                self.window.blit(self.FASCIST, (162+(160 * i), 628))
     
     def add_card(self, card):
         self.cards = card
 
 
 class screen:
-    BACKGROUND = (9, 71, 15)
-    def __init__(self):
+    BACKGROUND = (48, 47, 47)
+    def __init__(self, num):
         pygame.init()
         img = pygame.image.load('icon.svg')
         pygame.display.set_icon(img) 
         width, height = 1000, 500
         self.window = pygame.display.set_mode((width, height), pygame.RESIZABLE)
-        self.board = board(self.window)
+        self.board = board(self.window, num)
         pygame.display.set_caption("secret hitler")
     
     def update(self):
