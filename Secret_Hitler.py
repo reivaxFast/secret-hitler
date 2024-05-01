@@ -14,8 +14,10 @@
 ### President and Chancellor choose a card to DISCARD not to keep and they must be careful, no taking back their selection
 
 import random, os
+
 class game: ### Number of Facists Policies placed
     def __init__(self) -> None:
+        self.output = open('output.txt', 'w')
         self.game_state = False  ### Used to end the game when a Party has won
         self.players = []        ### List of players
         self.order_players = []  ### Used in party_membership_view() to show roles without revealing anything
@@ -31,6 +33,7 @@ class game: ### Number of Facists Policies placed
         name = input("Enter name\n").lower()
         self.players.append(name)
         self.order_players.append(name)
+        
 
     ### Function should have been called setup but I'm too scared of errors to change it
     ### Add players to the game ("players" list)
@@ -141,7 +144,9 @@ class game: ### Number of Facists Policies placed
                 print('number of liberal policies:', str(self.lib_board))
                 if self.lib_board == 5:
                     print("End of game Liberals won")
+                    self.output.close()
                     self.game_state = False
+                    quit()
                 else:
                     self.rounds()
             else:
@@ -150,7 +155,9 @@ class game: ### Number of Facists Policies placed
                 print('number of liberal policies: ' + str(self.lib_board))
                 if self.fac_board == 6:
                     print("End of game Facists won")
+                    self.output.close()
                     self.game_state = False
+                    quit()
                 else:
                     self.president_powers()
         else:

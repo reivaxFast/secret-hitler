@@ -8,6 +8,8 @@ class board:
     B7 = pygame.transform.scale_by(pygame.image.load('images/7-8.png'), 0.7)
     B9 = pygame.transform.scale_by(pygame.image.load('images/9-10.png'), 0.7)
     lib = pygame.transform.scale_by(pygame.image.load('images/lib.png'), 0.7)
+    lib_alpha = 255
+    fasc_alpha = 255
     def __init__(self, window: pygame.Surface, num) -> None:
         self.window = window
         self.num_players = num
@@ -23,13 +25,27 @@ class board:
             self.window.blit(self.B9, (35, 500))
         self.window.blit(self.lib, (35, 20))
         for i in range(5):
-            if i<self.cards[0]:
+            self.LIBERAL.set_alpha(255)
+            if i<self.cards[0]-1:
+                self.window.blit(self.LIBERAL, (245+(160 * i), 147))
+            elif i < self.cards[0]:
+                self.LIBERAL.set_alpha(self.lib_alpha)
                 self.window.blit(self.LIBERAL, (245+(160 * i), 147))
         for i in range(6):
-            if i<self.cards[1]:
+            self.FASCIST.set_alpha(255)
+            if i<self.cards[1]-1:
                 self.window.blit(self.FASCIST, (162+(160 * i), 628))
+            elif i < self.cards[1]:
+                self.FASCIST.set_alpha(self.fasc_alpha)
+                self.window.blit(self.FASCIST, (162+(160 * i), 628))
+        self.lib_alpha = min(self.lib_alpha+1, 255)
+        self.fasc_alpha = min(self.fasc_alpha+1, 255)
     
     def add_card(self, card):
+        if self.cards[0] != card[0]:
+            self.lib_alpha = 0
+        elif self.cards[1] != card[1]:
+            self.fasc_alpha = 0
         self.cards = card
 
 
