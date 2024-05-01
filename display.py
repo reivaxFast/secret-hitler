@@ -2,12 +2,12 @@ import pygame, sys
 
 class board:
     HOLDERS = (54, 52, 53)
-    LIBERAL = pygame.transform.scale_by(pygame.image.load('liberal.png'), 0.85)
-    FASCIST = pygame.transform.scale_by(pygame.image.load('fascist.png'), 0.85)
-    B5 = pygame.transform.scale_by(pygame.image.load('5-6.png'), 0.7)
-    B7 = pygame.transform.scale_by(pygame.image.load('7-8.png'), 0.7)
-    B9 = pygame.transform.scale_by(pygame.image.load('9-10.png'), 0.7)
-    lib = pygame.transform.scale_by(pygame.image.load('lib.png'), 0.7)
+    LIBERAL = pygame.transform.scale_by(pygame.image.load('images/liberal.png'), 0.85)
+    FASCIST = pygame.transform.scale_by(pygame.image.load('images/fascist.png'), 0.85)
+    B5 = pygame.transform.scale_by(pygame.image.load('images/5-6.png'), 0.7)
+    B7 = pygame.transform.scale_by(pygame.image.load('images/7-8.png'), 0.7)
+    B9 = pygame.transform.scale_by(pygame.image.load('images/9-10.png'), 0.7)
+    lib = pygame.transform.scale_by(pygame.image.load('images/lib.png'), 0.7)
     def __init__(self, window: pygame.Surface, num) -> None:
         self.window = window
         self.num_players = num
@@ -37,7 +37,7 @@ class screen:
     BACKGROUND = (48, 47, 47)
     def __init__(self, num):
         pygame.init()
-        img = pygame.image.load('icon.svg')
+        img = pygame.image.load('images/icon.svg')
         pygame.display.set_icon(img) 
         width, height = 1000, 500
         self.window = pygame.display.set_mode((width, height), pygame.RESIZABLE)
