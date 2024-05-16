@@ -1,0 +1,20 @@
+number of players: 5, number of fascists: 1.0, number of liberals: 3.0
+q is a Facist
+w is a Liberal
+e is a Liberal
+r is a Liberal
+t is a Secret Hitler
+cards drawn: ['Liberal', 'Facist', 'Liberal'], president discarded: 2
+chancellor discarded: 2, which leaves a Liberal
+cards drawn: ['Liberal', 'Facist', 'Facist'], president discarded: 2
+chancellor discarded: 1, which leaves a Facist
+cards drawn: ['Facist', 'Facist', 'Liberal'], president discarded: 2
+chancellor discarded: 2, which leaves a Facist
+cards drawn: ['Facist', 'Facist', 'Liberal'], president discarded: 2
+chancellor discarded: 2, which leaves a Facist
+cards drawn: ['Facist', 'Facist', 'Liberal'], president discarded: 2
+chancellor discarded: 2, which leaves a Facist
+cards drawn: ['Facist', 'Liberal', 'Liberal'], president discarded: 2
+chancellor discarded: 2, which leaves a Facist
+cards drawn: ['Facist', 'Facist', 'Liberal'], president discarded: 2
+chancellor discarded: 2, which leaves a Facist

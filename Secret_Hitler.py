@@ -13,7 +13,7 @@
 ### Player should not forget their role it is tedious though not impossible to check
 ### President and Chancellor choose a card to DISCARD not to keep and they must be careful, no taking back their selection
 
-import random, os
+import random, os, math
 
 class game: ### Number of Facists Policies placed
     def __init__(self) -> None:
@@ -53,10 +53,14 @@ class game: ### Number of Facists Policies placed
         if self.num_players < 5:                             ###Lower band
             print("Too few players\n")
             self.game_start()
+            return
         elif self.num_players > 10:                          ###Upper band
             print("Too many players\n")
             self.game_start()
+            return
 
+        self.level = math.ceil(self.num_players/2)-2
+        
         ### Calculates correct number of Liberal and Facist players, trust me it works
         if self.num_players % 2 == 0:
             self.numliberals = self.num_players - (self.num_players/2 + 1)
@@ -64,6 +68,8 @@ class game: ### Number of Facists Policies placed
         else:
             self.numfacists = (self.num_players-3)/2
             self.numliberals = self.num_players - (self.numfacists + 1)
+        
+        self.output.write(f'number of players: {str(self.num_players)}, number of fascists: {str(self.numfacists)}, number of liberals: {str(self.numliberals)}\n')
 
         ### Assign roles - Adds correct number of Facists and Liberals, as well as Secret Hitler to the list party_mem
         self.numfacists = int(self.numfacists)
@@ -98,8 +104,10 @@ class game: ### Number of Facists Policies placed
             os.system('cls' if os.name == 'nt' else 'clear')
             self.pos = self.players.index(person)
             print(person)
+            role = self.party_mem[self.pos]
+            self.output.write(f'{person} is a {role}\n')
             self.next_ = input("Press Enter to show role.") ### Gives spacing so player sees their own and not the next's
-            print("\nYou are", self.party_mem[self.pos])
+            print("\nYou are", role)
             self.next_ = input("Press Enter to continue.")  ### Gives spacing so player sees their own and not the next's
         self.rounds()
 
@@ -111,12 +119,14 @@ class game: ### Number of Facists Policies placed
         ### President selection of cards
         draw = input("Draw cards(Press Enter)")
         print(self.deck[:3])
+        self.output.write(f'')
         selection = input("Discard a card(1, 2 or 3)\n")
         if selection.isnumeric() == True:    ### Error catching
             selection = int(selection)
             if selection < 1 or selection > 3:
                 print("Invalid selection. Try again\n")
                 self.rounds()
+            self.output.write(f'cards drawn: {self.deck[:3]}, president discarded: {selection}\n')
             selection -=1 ### Does this so it can be used as the index to move the item
             self.discard.append(self.deck[selection])
             self.deck.pop(selection)
@@ -138,6 +148,7 @@ class game: ### Number of Facists Policies placed
             self.selection -=1 ### Does this so it can be used as the index to move the item
             self.discard.append(self.deck[self.selection])
             self.deck.pop(self.selection)
+            self.output.write(f'chancellor discarded: {self.selection+1}, which leaves a {self.deck[0]}\n')
             if self.deck[0] == "Liberal":
                 self.lib_board += 1
                 print('number of fascist policies:', str(self.fac_board))
@@ -241,6 +252,10 @@ class game: ### Number of Facists Policies placed
         
     def get_board(self):
         return [self.lib_board, self.fac_board]
+    
+    def end(self):
+        self.output.close()
+        quit()
 
     ### Junk, do what you will with it
 

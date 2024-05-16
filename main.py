@@ -5,8 +5,9 @@ t = threading.Thread(target=g.game_start)
 t.start()
 while g.num_players == 0:
     pass
-
 screen = display.screen(g.num_players)
 while True:
-    screen.update()
+    if screen.update():
+        g.end()
+        screen.end()
     screen.add_card(g.get_board())
